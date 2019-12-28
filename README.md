@@ -112,7 +112,7 @@ This method creates a critical log
 
 
 # Output
-The file will be created on the current working directory, to change this just add a folder before the name of your file, followd by a `/`
+The file will be created on the current working directory, to change this just add a folder before the name of your file, followed by a `/`
 ```js
 logger.basicConfig("DEBUG", '#{message}', 'logs/output');
 ```
