@@ -1,14 +1,6 @@
 const Logger = require('../index');
-const logger = new Logger('debug', '#{time} | #{levelname} > #{message}');
+const logger = new Logger('debug', '#{time} | #{levelname} > #{message}', 'output', 'a');
 
+console.log(logger.getPath);
 
-console.log(logger.getLevelInteger, logger.getLevelString);
-
-
-logger.debug('ewrror', 'lol');
-logger.info('ewrror', 'lol');
-logger.warning('ewrror', 'lol');
-logger.error('ewrror', 'lol');
-logger.critical('ewrror', 'lol');
-
-console.log(parseInt('6'))
+logger.reLog(logger.getPath);

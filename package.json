@@ -1,6 +1,6 @@
 {
   "name": "betterlogging.js",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A logging package that tries to mimic python's logging module",
   "main": "src/index.js",
   "scripts": {
