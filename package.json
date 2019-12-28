@@ -1,0 +1,12 @@
+{
+  "name": "betterlogging.js",
+  "version": "1.0.0",
+  "description": "A logging package that tries to mimic python's logging module",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["logging", "logs", "logger"],
+  "author": "zSnails#5755",
+  "license": "ISC"
+}
