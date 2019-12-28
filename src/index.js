@@ -2,12 +2,8 @@ const fs = require('fs');
 const path = require('path');
 
 class Logging {
-    constructor() {
-        // Nothing here /shrug
-    }
-
-    basicConfig(level, format, filename, filemode) {
-        // Basi config lets us configure our logger
+    constructor(level, format, filename, filemode) {
+        level = level.toUpperCase();
         if (!level) this.set_level = 'NOTSET'
         else this.set_level = level;
         this.levelParser(this.set_level);
@@ -21,11 +17,33 @@ class Logging {
         } else {
             this.mode = 'print';
         }
+    }
 
+    get getFormatter() {
+        return this.format;
+    }
+
+    get getLevelInteger() {
+        return this.parsed_level;
+    }
+
+    get getLevelString() {
+        return this.set_level;
+    }
+
+    get getLogMode() {
+        return this.mode;
+    }
+
+    setLevel(level) {
+        this.set_level = level;
+        this.levelParser(level);
     }
 
     debug(...args) {
         // DEBUG: First level of information
+        args = Array.from(arguments);
+        args = args.join().replace(/\,/g, " ");
         if (this.parsed_level > 1) return;
         this.level = 'DEBUG';
         if (this.mode === 'print') {
@@ -37,6 +55,8 @@ class Logging {
 
     info(...args) {
         // INFO: Second level of information
+        args = Array.from(arguments);
+        args = args.join().replace(/\,/g, " ");
         if (this.parsed_level > 2) return;
         this.level = 'INFO';
         if (this.mode === 'print') {
@@ -48,6 +68,8 @@ class Logging {
 
     warning(...args) {
         // WARNING: 3rd level of information
+        args = Array.from(arguments);
+        args = args.join().replace(/\,/g, " ");
         if (this.parsed_level > 3) return;
         this.level = 'WARNING';
         if (this.mode === 'print') {
@@ -59,6 +81,8 @@ class Logging {
 
     error(...args) {
         // ERROR: 4th level of information
+        args = Array.from(arguments);
+        args = args.join().replace(/\,/g, " ");
         if (this.parsed_level > 4) return;
         this.level = 'ERROR';
         if (this.mode === 'print') {
@@ -70,6 +94,8 @@ class Logging {
 
     critical(...args) {
         // CRITICAL: Last level of information
+        args = Array.from(arguments);
+        args = args.join().replace(/\,/g, " ");
         if (this.parsed_level > 5) return;
         this.level = 'CRITICAL';
         if (this.mode === 'print') {
@@ -100,8 +126,8 @@ class Logging {
             .replace(/\#\{date\}/g, new Date().toLocaleDateString())
             .replace(/\#\{filename\}/g, __filename)
             .replace(/\#\{levelname\}/g, this.level)
-            .replace(/\#\{message\}/g, message))
-            .replace(/\#{time}/g, new Date().toLocaleTimeString());
+            .replace(/\#\{message\}/g, message)
+            .replace(/\#{time}/g, new Date().toLocaleTimeString()));
     }
 
     write(format, message) {

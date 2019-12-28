@@ -8,9 +8,7 @@ To set up BetterLogging.js import the module then use the `basicConfig` method t
 
 ```js
 const Logging = require('betterlogging.js');
-const logger = new Logging();
-
-logger.basicConfig(level, format, filename, filemode);
+const logger = new Logging(level, format, filename, filemode);
 ```
 
 # Log Levels
