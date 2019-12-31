@@ -1,6 +1,19 @@
 const Logger = require('../index');
-const logger = new Logger('debug', '#{time} | #{levelname} > #{message}', 'output', 'a');
+const options = {
+    name: 'tests',
+    //filename: 'output',
+    //filemode: 'a',
+    level: 'DEBUG',
+    format: '#{time} |#{name}| #{levelname} > #{message}',
+}
 
-console.log(logger.getPath);
+const logger = new Logger(options);
 
-logger.reLog(logger.getPath);
+logger.info('picha', 'marrai');
+logger.setName('NEWNAME');
+logger.info('picha', 'marrai');
+logger.debug('Testing', 'some', 'stuff');
+logger.warning('warning');
+logger.error('err');
+logger.critical('can\'t work as intended');
+console.log(logger.getLevelInteger)

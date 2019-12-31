@@ -10,21 +10,28 @@ To set up BetterLogging.js import the module then use the `basicConfig` method t
 
 ```js
 const Logging = require('betterlogging.js');
-const logger = new Logging(level, format, filename, filemode);
+const ops =  {
+    name: 'example',
+    filemode: 'example',
+    filename: 'output-example',
+    format: '#{levelname} > #{message}',
+    level: 'DEBUG',
+}
+const logger = new Logging(ops);
 ```
 ---
 
 # Log Levels
-There are 5 different levels, each represented by a string and an integer
+There are 5 different levels, each represented by a string
 
 
-|String|Integer|
-|:-:|:-:|
-|DEBUG|1|
-|INFO|2|
-|WARNING|3|
-|ERROR|4|
-|CRITICAL|5|
+|String|
+|:-:|
+|DEBUG|
+|INFO|
+|WARNING|
+|ERROR|
+|CRITICAL|
 
 ---
 
@@ -66,7 +73,7 @@ This method returns the current path of the log file, if there's no log file it 
 
 ## setFile()
 This method modifies the current file name (WARNING: it doesn't change the existing file, it creates a new file each time the method is called)
-    
+
 ### Available file modes
 |Name|Description|
 |:-:|:-|
@@ -88,6 +95,9 @@ This method modifies the current file name (WARNING: it doesn't change the exist
 ## reLog(*file*)
 This method re-logs everything from a file 
 > This method may be deprecated in the future
+
+## setName(*name*)
+This method allows you to change the name of your current logger. Helpful if need to know in which scope a log was created
 
 ## getLogMode
 This method returns the current mode for the file (defaults to 'w' (write mode))
