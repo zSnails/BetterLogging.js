@@ -1,5 +1,8 @@
 # BetterLogging.js
 
+[Full Documentation](https://zsnails.github.io/BetterLogging.js/)
+
+
 ## Available File Modes
 |Name|Description|
 |:-:|:-|
