@@ -1,5 +1,4 @@
 node_modules
-tests
 .npmignore
 output.log
 README.old.md
