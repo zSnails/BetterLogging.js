@@ -3,8 +3,14 @@ const path = require('path');
 
 class Logging {
     /**
-     * 
-     * @param {Object} options An object containing each option
+     * The constructor for the logger
+     * @constructor
+     * @param {object} options - An object containing each option
+     * @param {string} [options.level] - The level of the logger itself
+     * @param {string} options.format - Your own custom formatter
+     * @param {string} [options.filename] - The name of the file
+     * @param {string} [options.filemode] - The selected filemode
+     * @param {string} [options.name] - Sets a name for the logger
      */
     constructor(options) {
         this.set_level = options.level || 'NOTSET'
@@ -15,33 +21,48 @@ class Logging {
         this.logger_name = options.name || 'root';
         this.mode = options.filename ? this.mode = 'write' : this.mode = 'print';
     }
-
+    /**
+     * @method
+     * @returns {string} The current formatter
+     */
     get getFormatter() {
         return this.format;
     }
-
+    /**
+     * @method
+     * @returns {number} The level integer
+     */
     get getLevelInteger() {
         return this.parsed_level;
     }
-
+    /**
+     * @method
+     * @returns {string} The current level
+     */
     get getLevelString() {
         return this.set_level;
     }
-
+    /**
+     * @method
+     * @returns {string} The current logging mode
+     */
     get getLogMode() {
         return this.mode;
     }
     /**
-     * 
-     * @param {String} name A string containing the new name for this logger
+     * Sets a new name for the current logger
+     * @method
+     * @param {String} name - A string containing the new name for this logger
      */
     setName(name) {
         this.logger_name = name;
     }
 
     /**
-     * 
-     * @param {String} level The level you want to set (Read the [documentation](https://github.com/zSnails/BetterLogging.js#log-levels) for more info)
+     * Sets the current level
+     * @method
+     * @param {string} level The level you want to set (Read the [documentation](https://github.com/zSnails/BetterLogging.js#log-levels) for more info)
+     * @returns {string}
      */
     setLevel(level) {
         this.set_level = level;
@@ -49,20 +70,27 @@ class Logging {
         return 'success'
     }
     /**
-     * 
-     * @param {String} fmt The new formatter (Read the [documentation](https://github.com/zSnails/BetterLogging.js#formatting) for more info)
+     * Sets a new formatter
+     * @method
+     * @param {string} fmt The new formatter (Read the [documentation](https://github.com/zSnails/BetterLogging.js#formatting) for more info)
+     * @returns {string}
      */
     setFormatter(fmt) {
         this.format = fmt;
         return 'sucess'
     }
-
+    /**
+     * @method
+     * @returns {string}
+     */
     get getFile() {
         return this.filename + ".log";
     }
     /**
-     * 
-     * @param {String} file The path to the new logging file, a new file is created each time the function is called with a new path (Read the [documentation](https://github.com/zSnails/BetterLogging.js#setfile) for more info)
+     * Sets a new file name
+     * @method
+     * @param {string} file The path to the new logging file, a new file is created each time the function is called with a new path (Read the [documentation](https://github.com/zSnails/BetterLogging.js#setfile) for more info)
+     * @returns {string}
      */
     setFile(file) {
         this.filename = file;
@@ -70,19 +98,25 @@ class Logging {
         return 'success'
     }
     /**
-     * 
-     * @param {String} file The path to the file you want to re-log (Read the [documentation](https://github.com/zSnails/BetterLogging.js#relog) for more info)
+     * Reads a log file and prints it to the console
+     * @method
+     * @param {string} file The path to the file you want to re-log (Read the [documentation](https://github.com/zSnails/BetterLogging.js#relog) for more info)
      */
     reLog(file) {
         console.log(fs.readFileSync(file, 'utf8'));
     }
-
+    /**
+     * @method
+     * @returns {string}
+     */
     get getPath() {
         return this.filepath = path.join(process.cwd(), `${this.filename}.log`);
     }
     /**
-     * 
+     * Creates a debug log
+     * @method
      * @param  {...any} args The arguments to pass through the method, multiple arguments can be passed
+     * @returns {void}
      */
     debug(...args) {
         // DEBUG: First level of information
@@ -93,8 +127,10 @@ class Logging {
         this.mode === 'print' ? this.log(this.format, args) : this.write(this.format, args);
     }
     /**
-    * 
+    * Creates an info log
+    * @method
     * @param  {...any} args The arguments to pass through the method, multiple arguments can be passed
+    * @returns {void}
     */
     info(...args) {
         // INFO: Second level of information
@@ -105,8 +141,10 @@ class Logging {
         this.mode === 'print' ? this.log(this.format, args) : this.write(this.format, args);
     }
     /**
-    * 
+    * Creates a warning log
+    * @method
     * @param  {...any} args The arguments to pass through the method, multiple arguments can be passed
+    * @returns {void}
     */
     warning(...args) {
         // WARNING: 3rd level of information
@@ -147,22 +185,22 @@ class Logging {
     levelParser(level_str) {
         // Parses each level into an integer
         switch (level_str) {
-            case('NOTSET'):
+            case ('NOTSET'):
                 this.parsed_level = 0;
                 break;
-            case('DEBUG'):
+            case ('DEBUG'):
                 this.parsed_level = 1;
                 break;
-            case('INFO'):
+            case ('INFO'):
                 this.parsed_level = 2;
                 break;
-            case('WARNING'):
+            case ('WARNING'):
                 this.parsed_level = 3;
                 break;
-            case('ERROR'):
+            case ('ERROR'):
                 this.parsed_level = 4
                 break;
-            case('CRITICAL'):
+            case ('CRITICAL'):
                 this.parsed_level = 5
                 break;
         }
