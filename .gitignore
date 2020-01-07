@@ -3,4 +3,5 @@ tests
 .npmignore
 output.log
 README.old.md
-docs
+jsdoc.json
+src/tests
