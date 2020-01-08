@@ -1,9 +1,28 @@
-# BetterLogging.js
+<h1 align="center">BetterLogging.js</h1>
+<p align="center">
+<img style="width:50%; margin:auto;" src="assets/BetterLogginglogoWhiteBG.png">
+</p>
+<p align="center">
+    <a href="https://zsnails.github.io/BetterLogging.js/">
+        Full Documentation
+    </a>
+</p>
+<p align="center">
+    <img alt="npm" src="https://img.shields.io/npm/dt/betterlogging.js?style=for-the-badge">
+    <img alt="npm" src="https://img.shields.io/npm/v/betterlogging.js?style=for-the-badge">
+</p>
+<p align="center">
+    <img alt="Twitter Follow" src="https://img.shields.io/twitter/follow/zSnails?label=Follow%20me&style=social">
+    <img alt="GitHub followers" src="https://img.shields.io/github/followers/zSnails?style=social">
+    <img alt="GitHub forks" src="https://img.shields.io/github/forks/zSnails/BetterLogging.js?style=social"><br>
+    <img alt="GitHub stars" src="https://img.shields.io/github/stars/zSnails/BetterLogging.js?style=social">
+    <img alt="GitHub watchers" src="https://img.shields.io/github/watchers/zSnails/BetterLogging.js?style=social">
+</p>
 
-[Full Documentation](https://zsnails.github.io/BetterLogging.js/)
-
+---
 
 ## Available File Modes
+
 |Name|Description|
 |:-:|:-|
 |'a'|Open file for appending. The file is created if it does not exist.|
