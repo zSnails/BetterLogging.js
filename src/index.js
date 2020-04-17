@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-
 let levels = {
     notset: 0,
     debug: 1,
@@ -9,7 +8,6 @@ let levels = {
     error: 4,
     critical: 5
 };
-
 class Logging {
     /**
      * The constructor for the logger
@@ -66,7 +64,6 @@ class Logging {
     setName(name) {
         this.logger_name = name;
     }
-
     /**
      * Sets the current level
      * @param {string} level The level you want to set (Read the [documentation](https://github.com/zSnails/BetterLogging.js#log-levels) for more info)
@@ -220,5 +217,4 @@ class Logging {
         return format
     }
 }
-
 module.exports = Logging;
