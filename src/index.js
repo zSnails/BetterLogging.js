@@ -1,6 +1,15 @@
 const fs = require('fs');
 const path = require('path');
 
+let levels = {
+    notset: 0,
+    debug: 1,
+    info: 2,
+    warning: 3,
+    error: 4,
+    critical: 5
+};
+
 class Logging {
     /**
      * The constructor for the logger
@@ -13,9 +22,9 @@ class Logging {
      * @param {string} [options.name] - Sets a name for the logger
      */
     constructor(options) {
-        this.set_level = options.level || 'NOTSET'
+        this.set_level = options.level || 'NOTSET';
         this.levelParser(this.set_level);
-        this.format = options.format || '[#{date}|#{time}]:#{name}:#{levelname}: #{message}'
+        this.format = options.format || '[#{date}|#{time}]:#{name}:#{levelname}: #{message}';
         this.filename = options.filename;
         this.filemode = options.filemode;
         this.logger_name = options.name || 'root';
@@ -25,28 +34,28 @@ class Logging {
      * Gets the current formatter
      * @returns {string} The current formatter
      */
-    get getFormatter() {
+    get formatter() {
         return this.format;
     }
     /**
      * Returns the current level integer
      * @returns {number} The level integer
      */
-    get getLevelInteger() {
+    get levelInteger() {
         return this.parsed_level;
     }
     /**
      * Gets the current log level
      * @returns {string} The current level
      */
-    get getLevelString() {
+    get levelString() {
         return this.set_level;
     }
     /**
      * Gets the current log mode
      * @returns {string} The current logging mode
      */
-    get getLogMode() {
+    get logMode() {
         return this.mode;
     }
     /**
@@ -79,7 +88,7 @@ class Logging {
      * Gets the name of the current log file
      * @returns {string} The name of the file or 'none' if there's no file
      */
-    get getFile() {
+    get logFile() {
         if (this.filename) return this.filename + ".log";
         else return 'none'
     }
@@ -91,11 +100,12 @@ class Logging {
     setFile(file) {
         this.filename = file;
         this.getPath;
-        return 'success'
+        return this.filename
     }
     /**
      * Reads a log file and prints it to the console
      * @param {string} file The path to the file you want to re-log
+     * @returns {void}
      */
     reLog(file) {
         console.log(fs.readFileSync(file, 'utf8'));
@@ -115,7 +125,6 @@ class Logging {
      */
     debug(...args) {
         // DEBUG: First level of information
-        args = Array.from(arguments);
         args = args.join().replace(/\,/g, " ");
         if (this.parsed_level > 1) return;
         this.level = 'DEBUG';
@@ -128,7 +137,6 @@ class Logging {
     */
     info(...args) {
         // INFO: Second level of information
-        args = Array.from(arguments);
         args = args.join().replace(/\,/g, " ");
         if (this.parsed_level > 2) return;
         this.level = 'INFO';
@@ -141,7 +149,6 @@ class Logging {
     */
     warning(...args) {
         // WARNING: 3rd level of information
-        args = Array.from(arguments);
         args = args.join().replace(/\,/g, " ");
         if (this.parsed_level > 3) return;
         this.level = 'WARNING';
@@ -154,7 +161,6 @@ class Logging {
      */
     error(...args) {
         // ERROR: 4th level of information
-        args = Array.from(arguments);
         args = args.join().replace(/\,/g, " ");
         if (this.parsed_level > 4) return;
         this.level = 'ERROR';
@@ -167,7 +173,6 @@ class Logging {
      */
     critical(...args) {
         // CRITICAL: Last level of information
-        args = Array.from(arguments);
         args = args.join().replace(/\,/g, " ");
         if (this.parsed_level > 5) return;
         this.level = 'CRITICAL';
@@ -175,31 +180,11 @@ class Logging {
     }
     /**
      * Turns level strings into integers
-     * @param  {String} level_str You don't need to use this function yourself
+     * @param  {string} level_str You don't need to use this function yourself
      * @returns {void}
      */
     levelParser(level_str) {
-        // Parses each level into an integer
-        switch (level_str) {
-            case ('NOTSET'):
-                this.parsed_level = 0;
-                break;
-            case ('DEBUG'):
-                this.parsed_level = 1;
-                break;
-            case ('INFO'):
-                this.parsed_level = 2;
-                break;
-            case ('WARNING'):
-                this.parsed_level = 3;
-                break;
-            case ('ERROR'):
-                this.parsed_level = 4
-                break;
-            case ('CRITICAL'):
-                this.parsed_level = 5
-                break;
-        }
+        this.parsed_level = levels[level_str.toLowerCase()]
     }
     /**
      * Creates a log and parses it
@@ -221,7 +206,7 @@ class Logging {
     /**
      * Turns the given format into a human readable string
      * @param {string} format The formatter used
-     * @param {message} message The log message
+     * @param {string} message The log message
      * @returns {void}
      */
     formatParser(format, message) {
