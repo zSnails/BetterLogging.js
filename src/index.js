@@ -217,4 +217,5 @@ class Logging {
         return format
     }
 }
+
 module.exports = Logging;
